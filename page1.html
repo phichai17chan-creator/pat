@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. วิธีเช็ก UNDERTONE ผิว - Personal Color Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #1e293b;
+            --bg-card-header: #0f172a;
+            --border-card: #334155;
+            --accent-fair: #38bdf8;
+            --accent-medium: #f59e0b;
+            --accent-indigo: #6366f1;
+            --accent-rose: #f43f5e;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding: 20px 10px 50px 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Banner */
+        .banner-wrapper {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 25px;
+            border: 1px solid var(--border-card);
+        }
+
+        .banner-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            display: flex;
+            gap: 12px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border-card);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            background: var(--accent-fair);
+            color: #000;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .nav-item:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+        }
+
+        /* Hero */
+        .hero-section {
+            background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            margin-bottom: 35px;
+        }
+
+        .hero-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Check Methods Grid */
+        .check-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .check-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-card);
+            overflow: hidden;
+        }
+
+        .check-header {
+            background: var(--bg-card-header);
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-fair);
+            border-bottom: 1px solid var(--border-card);
+        }
+
+        .check-body {
+            padding: 20px;
+        }
+
+        .check-item {
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .check-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .tag-cool { background: #2563eb; color: #fff; }
+        .tag-warm { background: #d97706; color: #fff; }
+        .tag-neutral { background: #059669; color: #fff; }
+
+        /* CTA Bottom */
+        .banner-cta {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            border: 1px solid var(--accent-indigo);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            background: var(--accent-indigo);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 600px) {
+            .nav-bar { flex-direction: column; }
+            .banner-cta { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- แบนเนอร์ -->
+        <div class="banner-wrapper">
+            <img src="img/b.png" alt="Personal Color Studio Banner">
+        </div>
+
+        <!-- แถบนำทาง -->
+        <nav class="nav-bar">
+            <a href="index.html" class="nav-item">🏠 MAIN STUDIO</a>
+            <a href="page1.html" class="nav-item active">🔍 01. วิธีเช็ก UNDERTONE</a>
+            <a href="page2.html" class="nav-item">👗 02. คลังแมทสีตามสีผิว</a>
+        </nav>
+
+        <!-- Hero Header -->
+        <section class="hero-section">
+            <h1 class="hero-title">🔍 3 วิธีเช็ก UNDERTONE ผิวด้วยตัวเองง่ายๆ</h1>
+            <p class="hero-subtitle">รู้ Undertone จริง ช่วยให้เลือกสีเสื้อผ้าและเครื่องประดับได้ขับผิวและดูแพงขึ้นทันที</p>
+        </section>
+
+        <!-- Grid วิธีเช็ก -->
+        <div class="check-grid">
+            
+            <!-- วิธีที่ 1 -->
+            <div class="check-card">
+                <div class="check-header">🩸 1. เช็กจากสีเส้นเลือดข้อมือ (Vein Test)</div>
+                <div class="check-body">
+                    <div class="check-item">
+                        <span class="tag tag-cool">COOL TONE</span>
+                        <p>เส้นเลือดออกสี **ม่วง หรือ น้ำเงิน** เหมาะกับเสื้อผ้าโทนเย็น และพาสเทล</p>
+                    </div>
+                    <div class="check-item">
+                        <span class="tag tag-warm">WARM TONE</span>
+                        <p>เส้นเลือดออกสี **เขียว หรือ เขียวมะกอก** เหมาะกับเอิร์ธโทน และสีโทนอุ่น</p>
+                    </div>
+                    <div class="check-item">
+                        <span class="tag tag-neutral">NEUTRAL TONE</span>
+                        <p>เส้นเลือดมีทั้งสี **เขียวผสมน้ำเงิน/ม่วง** สามารถแต่งเสื้อผ้าได้หลากหลายโทนสี</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- วิธีที่ 2 -->
+            <div class="check-card">
+                <div class="check-header">💍 2. เช็กจากเครื่องประดับ (Jewelry Test)</div>
+                <div class="check-body">
+                    <div class="check-item">
+                        <span class="tag tag-cool">COOL TONE</span>
+                        <p>ใส่เครื่องประดับ **สีเงิน (Silver)** แล้วผิวดูผ่อง สว่าง มีออร่าที่สุด</p>
+                    </div>
+                    <div class="check-item">
+                        <span class="tag tag-warm">WARM TONE</span>
+                        <p>ใส่เครื่องประดับ **สีทอง (Gold)** แล้วขับผิว ดูหรูหราเข้ากันได้ดีที่สุด</p>
+                    </div>
+                    <div class="check-item">
+                        <span class="tag tag-neutral">NEUTRAL TONE</span>
+                        <p>ใส่ได้ทั้ง **เงินและทอง** รอดทั้งคู่โดยไม่ทำให้ผิวดูหมอง</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- วิธีที่ 3 -->
+            <div class="check-card">
+                <div class="check-header">☀️ 3. เช็กปฏิกิริยาต่อแสงแดด (Sun Test)</div>
+                <div class="check-body">
+                    <div class="check-item">
+                        <span class="tag tag-cool">COOL TONE</span>
+                        <p>ออกแดดแล้วผิว **ไหม้แดงง่าย** เกิดอาการแสบร้อน แต่มักไม่ค่อยคล้ำขึ้นมาก</p>
+                    </div>
+                    <div class="check-item">
+                        <span class="tag tag-warm">WARM TONE</span>
+                        <p>ออกแดดแล้วผิว **คล้ำลงได้ง่าย** หรือกลายเป็นสีแทน แต่มักไม่ค่อยแดงแสบ</p>
+                    </div>
+                    <div class="check-item">
+                        <span class="tag tag-neutral">NEUTRAL TONE</span>
+                        <p>ผิวอาจจะแดงเล็กน้อยในตอนแรก แล้วค่อยๆ เปลี่ยนเป็นสีเข้มขึ้นนิดหน่อย</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ปุ่มไปยังหน้า 2 -->
+        <div class="banner-cta">
+            <div>
+                <h3 style="color: #a5b4fc; margin-bottom: 5px;">รู้ Undertone ของตัวเองแล้วใช่ไหม?</h3>
+                <p style="color: #e0e7ff; font-size: 0.9rem;">ไปดูตารางจับคู่สีเสื้อผ้า และไอเดียการแต่งตัวของแต่ละเฉดผิวกันเลย!</p>
+            </div>
+            <a href="page2.html" class="btn-primary">ไปหน้า 02. คลังแมทสีตามสีผิว ➔</a>
+        </div>
+
+        <footer>
+            <p>PERSONAL COLOR STUDIO — GUIDELINE FOR EVERY SKIN TONE</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

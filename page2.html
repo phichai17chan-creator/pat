@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. คลังแมทสี & โทนแต่งหน้าสีผม - Personal Color Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #1e293b;
+            --bg-card-header: #0f172a;
+            --border-card: #334155;
+            --accent-fair: #38bdf8;
+            --accent-medium: #f59e0b;
+            --accent-tan: #f97316;
+            --accent-dark: #a855f7;
+            --accent-rose: #f43f5e;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding: 20px 10px 50px 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .banner-wrapper {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 25px;
+            border: 1px solid var(--border-card);
+        }
+
+        .banner-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Navigation Bar - 2 Pages */
+        .nav-bar {
+            display: flex;
+            gap: 12px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border-card);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            background: var(--accent-fair);
+            color: #000;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .nav-item:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            margin-bottom: 35px;
+        }
+
+        .hero-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-heading {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            padding-left: 12px;
+            border-left: 4px solid var(--accent-fair);
+            color: var(--text-light);
+        }
+
+        /* Catalog Cards */
+        .catalog-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .catalog-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-card);
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .catalog-info {
+            flex: 1 1 350px;
+            padding: 25px;
+        }
+
+        .catalog-media {
+            flex: 1 1 280px;
+            background: var(--bg-card-header);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-left: 1px solid var(--border-card);
+        }
+
+        .img-placeholder {
+            width: 100%;
+            max-width: 300px;
+            height: 220px;
+            border: 2px dashed var(--border-card);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .skin-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid;
+        }
+
+        .title-fair { color: var(--accent-fair); border-color: var(--accent-fair); }
+        .title-medium { color: var(--accent-medium); border-color: var(--accent-medium); }
+        .title-tan { color: var(--accent-tan); border-color: var(--accent-tan); }
+        .title-dark { color: var(--accent-dark); border-color: var(--accent-dark); }
+
+        .color-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .chip {
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+        }
+
+        /* Makeup Grid */
+        .makeup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .makeup-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-card);
+            padding: 20px;
+        }
+
+        .makeup-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-card);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar { flex-direction: column; }
+            .catalog-media { border-left: none; border-top: 1px solid var(--border-card); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- แบนเนอร์ -->
+        <div class="banner-wrapper">
+            <img src="img/b.png" alt="Personal Color Studio Banner">
+        </div>
+
+        <!-- แถบนำทาง (2 หน้าหลัก) -->
+        <nav class="nav-bar">
+            <a href="index.html" class="nav-item">🏠 MAIN STUDIO</a>
+            <a href="page1.html" class="nav-item">🔍 01. วิธีเช็ก UNDERTONE</a>
+            <a href="page2.html" class="nav-item active">👗 02. คลังแมทสี & โทนแต่งหน้า</a>
+        </nav>
+
+        <section class="hero-section">
+            <h1 class="hero-title">👗 คลังคำแนะนำการแต่งตัว & เมคอัพตามสีผิว</h1>
+            <p style="color: #94a3b8;">รวมไอเดียการแมทช์สีเสื้อผ้า เครื่องประดับ โทนแต่งหน้า และสีผมที่ใช่ที่สุดสำหรับคุณ</p>
+        </section>
+
+        <!-- PART 1: สไตล์เสื้อผ้าและเครื่องประดับ -->
+        <div class="section-heading">1. คำแนะนำสีเสื้อผ้า & เครื่องประดับ (Clothing & Jewelry)</div>
+        
+        <div class="catalog-container">
+            
+            <!-- ผิวขาว -->
+            <div class="catalog-card">
+                <div class="catalog-info">
+                    <h2 class="skin-title title-fair">1. ผิวขาว (Fair / Pale Skin)</h2>
+                    <p><strong>คำแนะนำ:</strong> เหมาะกับสีพาสเทลหวานๆ และโทนสีเย็น ช่วยขับผิวให้ดูผ่องใสมีออร่า</p>
+                    <p style="margin-top: 6px;"><strong>เครื่องประดับ:</strong> <span style="color: #38bdf8;">สีเงิน (Silver)</span></p>
+                    <div class="color-chips">
+                        <span class="chip">พาสเทล</span> <span class="chip">เขียวมะกอก</span> <span class="chip">น้ำตาล</span> <span class="chip">เบจ</span> <span class="chip">น้ำเงิน</span> <span class="chip">แดงชมพู</span> <span class="chip">ชมพูอ่อน</span> <span class="chip">ม่วง</span>
+                    </div>
+                </div>
+                <div class="catalog-media">
+                    <div class="img-placeholder">
+                        <img src="img/fair.jpg" alt="ไอเดียชุดสำหรับผิวขาว" onerror="this.style.display='none'; this.parentNode.innerHTML='📷 ใส่รูปไอเดียชุดผิวขาว<br>(fair-outfit.jpg)';">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ผิวสองสี -->
+            <div class="catalog-card">
+                <div class="catalog-info">
+                    <h2 class="skin-title title-medium">2. ผิวสองสี / ผิว Olive (Medium Skin)</h2>
+                    <p><strong>คำแนะนำ:</strong> เหมาะกับเอิร์ธโทน โทนอุ่น และโทนกลางๆ ดูเนียนสวยเป็นธรรมชาติ</p>
+                    <p style="margin-top: 6px;"><strong>เครื่องประดับ:</strong> <span style="color: #f59e0b;">สีทอง (Gold)</span></p>
+                    <div class="color-chips">
+                        <span class="chip">เอิร์ธโทน</span> <span class="chip">แดงเข้ม</span> <span class="chip">เขียว</span> <span class="chip">กรมท่า</span> <span class="chip">ส้ม</span> <span class="chip">เหลือง</span> <span class="chip">ฟ้า</span> <span class="chip">ม่วง</span>
+                    </div>
+                </div>
+                <div class="catalog-media">
+                    <div class="img-placeholder">
+                        <img src="img/medium.jpg" alt="ไอเดียชุดสำหรับผิวสองสี" onerror="this.style.display='none'; this.parentNode.innerHTML='📷 ใส่รูปไอเดียชุดผิวสองสี<br>(medium-outfit.jpg)';">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ผิวแทน -->
+            <div class="catalog-card">
+                <div class="catalog-info">
+                    <h2 class="skin-title title-tan">3. ผิวแทน (Tan Skin)</h2>
+                    <p><strong>คำแนะนำ:</strong> เน้นสีสันสดใส และโทนร้อนจัดๆ ขับผิวให้ดูโกลว์สุขภาพดีมีเสน่ห์</p>
+                    <p style="margin-top: 6px;"><strong>เครื่องประดับ:</strong> <span style="color: #f97316;">สีทอง (Gold)</span></p>
+                    <div class="color-chips">
+                        <span class="chip">ส้มอิฐ</span> <span class="chip">ส้มสด</span> <span class="chip">เขียวอมฟ้า</span> <span class="chip">ฟ้าสด</span> <span class="chip">ขาว</span>
+                    </div>
+                </div>
+                <div class="catalog-media">
+                    <div class="img-placeholder">
+                        <img src="img/tan.jpg" alt="ไอเดียชุดสำหรับผิวแทน" onerror="this.style.display='none'; this.parentNode.innerHTML='📷 ใส่รูปไอเดียชุดผิวแทน<br>(tan-outfit.jpg)';">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ผิวเข้ม -->
+            <div class="catalog-card">
+                <div class="catalog-info">
+                    <h2 class="skin-title title-dark">4. ผิวเข้ม (Dark Skin)</h2>
+                    <p><strong>คำแนะนำ:</strong> เน้นสีเข้มสดๆ สีตัดกัน หรือพาสเทลโทนกลางๆ ไม่จืดเกินไป</p>
+                    <p style="margin-top: 6px;"><strong>เครื่องประดับ:</strong> <span style="color: #a855f7;">สีทอง (Gold)</span></p>
+                    <div class="color-chips">
+                        <span class="chip">น้ำเงินสด</span> <span class="chip">แดงสด</span> <span class="chip">ขาว</span> <span class="chip">ชมพูพาสเทล</span> <span class="chip">เหลืองสด</span>
+                    </div>
+                </div>
+                <div class="catalog-media">
+                    <div class="img-placeholder">
+                        <img src="img/dark.jpg" alt="ไอเดียชุดสำหรับผิวเข้ม" onerror="this.style.display='none'; this.parentNode.innerHTML='📷 ใส่รูปไอเดียชุดผิวเข้ม<br>(dark-outfit.jpg)';">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PART 2: โทนแต่งหน้าและสีผม -->
+        <div class="section-heading">2. โทนแต่งหน้า & สีผมตาม Undertone (Makeup & Hair Color)</div>
+
+        <div class="makeup-grid">
+            
+            <!-- Cool Tone -->
+            <div class="makeup-card">
+                <div class="makeup-title" style="color: var(--accent-fair);">❄️ Cool Tone (โทนเย็น)</div>
+                <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>💄 ลิป & บลัช:</strong> ชมพูนม, ชมพูกุหลาบ, ม่วงพรัม, แดงเชอร์รี่</p>
+                <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>💇‍♀️ สีผม:</strong> ดำธรรมชาติ, น้ำตาลหม่น (Ash Brown), น้ำตาลเทา</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);"><strong>✨ ไฮไลท์:</strong> ประกายมุก/ชมพู คอนทัวร์โทนเทาหม่น</p>
+            </div>
+
+            <!-- Warm Tone -->
+            <div class="makeup-card">
+                <div class="makeup-title" style="color: var(--accent-medium);">☀️ Warm Tone (โทนอุ่น)</div>
+                <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>💄 ลิป & บลัช:</strong> ส้มพีช, ส้มอิฐ, Coral, นู้ดน้ำตาล, แดงอมส้ม</p>
+                <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>💇‍♀️ สีผม:</strong> น้ำตาลช็อกโกแลต, ประกายทอง, บลอนด์ทอง</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);"><strong>✨ ไฮไลท์:</strong> ประกายทอง/แชมเปญ คอนทัวร์โทนน้ำตาลอุ่น</p>
+            </div>
+
+            <!-- Neutral Tone -->
+            <div class="makeup-card">
+                <div class="makeup-title" style="color: #10b981;">🌿 Neutral Tone (โทนกลาง)</div>
+                <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>💄 ลิป & บลัช:</strong> ชมพูอมส้ม, นู้ดธรรมชาติ, กุหลาบแห้ง (MLBB)</p>
+                <p style="font-size: 0.9rem; margin-bottom: 8px;"><strong>💇‍♀️ สีผม:</strong> น้ำตาลคาราเมล, น้ำตาลหม่นธรรมชาติ</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);"><strong>✨ ไฮไลท์:</strong> สีแชมเปญหรือโรสโกลด์ คอนทัวร์น้ำตาลธรรมชาติ</p>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>PERSONAL COLOR STUDIO — GUIDELINE FOR EVERY SKIN TONE</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
